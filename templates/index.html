@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Office Hour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>
+        .web-layout{
+                              min-width: 300px;
+                  width: 25%;
+        }
+    </style>
+</head>
+<body class="bg-secondary-subtle">
+    <div class="container">
+    {#Last office hour #}
+        <div class="card web-layout" style="margin: auto;
+                  margin-top: 1%;
+                  padding: 1%;">
+            <div class="card-body">
+                <h5 class="card-title">Last Office Hour</h5>
+                  {%  if payload.last.isLastOfficeHourExist  %}
+                      <p>{{ payload.last.date }}</p>
+                      <div class="row">
+                          <div class="col">
+                              Date
+                          </div>
+                          <div class="col">
+                              {{ payload.last.time | date }}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              Time
+                          </div>
+                          <div class="col">
+                              {{ payload.last.time | time }}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              Location
+                          </div>
+                          <div class="col">
+                              {{ payload.last.location }}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              Status
+                          </div>
+                          <div class="col">
+                              {{ payload.last.status }}
+                          </div>
+                      </div>
+                  {% else %}
+                      <div>
+                        <h2>Not exist</h2>
+                      </div>
+                  {% endif %}
+  </div>
+        </div>
+    {#Today office hour #}
+    <div class="card web-layout" style="margin: auto;
+                  margin-top: 1%;
+                  padding: 1%;">
+        <div class="card-body">
+        <h5 class="card-title">Today's Office Hour</h5>
+          <p>{{ payload.date }}</p>
+          {%  if payload.isTodayOfficeHourExist  %}
+              <div class="row">
+                  <div class="col">
+                      Time
+                  </div>
+                  <div class="col">
+                      {{ payload.time  | time}}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      Location
+                  </div>
+                  <div class="col">
+                      {{ payload.location }}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      Status
+                  </div>
+                  <div class="col">
+                      {{ payload.status }}
+                  </div>
+              </div>
+          <form action="/" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                  <input type="hidden" name="id" value={{ payload.id }}>
+                  <div class="row">
+                          {{ form.email }}
+                      </div>
+                  <div class="row">
+                          {{ form.email.error }}
+                      </div>
+                  <div class="row">
+                      <button class="btn btn-primary" type="submit" >I'm here</button>
+                  </div>
+              </div>
+          </form>
+          {% else %}
+              <div>
+                <h2>No meeting today</h2>
+              </div>
+          {% endif %}
+  </div>
+    </div>
+    {#Next office hour #}
+        <div class="card web-layout" style="margin: auto;
+                   margin-top: 1%;
+                  padding: 1%;">
+            <div class="card-body">
+                <h5 class="card-title">Next Office Hour</h5>
+                  {%  if payload.next.isLastOfficeHourExist  %}
+                      <p>{{ payload.next.date }}</p>
+                      <div class="row">
+                          <div class="col">
+                              Date
+                          </div>
+                          <div class="col">
+                              {{ payload.next.time | date }}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              Time
+                          </div>
+                          <div class="col">
+                              {{ payload.next.time | time }}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              Location
+                          </div>
+                          <div class="col">
+                              {{ payload.next.location }}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              Status
+                          </div>
+                          <div class="col">
+                              {{ payload.next.status }}
+                          </div>
+                      </div>
+                  {% else %}
+                      <div>
+                        <h2>Not exist</h2>
+                      </div>
+                  {% endif %}
+  </div>
+        </div>
+</div>
+</body>
+</html>

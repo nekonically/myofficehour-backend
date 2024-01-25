@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Model Table with Numbering</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Office Hour</h1>
+    <button>Add</button>
+        <table class="table table-bordered table-hover table-sm ">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th> <!-- Table header for numbering -->
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Participants</th>
+                    <!-- Add more table headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for model in officehour_list %}
+                    <tr>
+                        <td><a  href="management/{{ model.id }}">{{ model.id }}</a></td> <!-- Row number -->
+                        <td>{{ model.when | date }}</td>
+                        <td>{{ model.when | time }}</td>
+                        <td>{{ model.latestLocation }}</td>
+                        <td>{{ model.latestStatus }}</td>
+                        <td>{{ model.countParticipant }}</td>
+                        <!-- Add more data columns as needed -->
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">No models found.</td>
+                        <!-- Adjust the colspan value as per the number of columns -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
