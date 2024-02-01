@@ -42,4 +42,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path("", include("Myofficehour.urls"),name= "index"),
     path('admin/', admin.site.urls),
+    path('api/', include('Myofficehour.urls')),
 ]

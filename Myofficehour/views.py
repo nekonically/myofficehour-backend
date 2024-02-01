@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from Myofficehour.models import Officehour,Status,Location,Participant
+from Myofficehour.serializer import OfficehourSerializer,ListviewSerializer
 from datetime import date
 from django.http import HttpRequest
 from .forms import ParticipantForm
@@ -7,6 +8,7 @@ from django.db.models import Max, Count
 from django.views.generic.list import ListView
 from django.db.models import OuterRef, Subquery
 from django.views.generic.detail import DetailView
+from rest_framework import generics, permissions
 def get_client_ip(request):
     """Get the client's IP address from the request."""
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -166,3 +168,12 @@ class OfficehourDetailView(DetailView):
     model = Officehour
     template_name = "detailview.html"
 
+class OfficehourListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Officehour.objects.all()
+    serializer_class = ListviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class OfficehourListDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Officehour.objects.all()
+    serializer_class = OfficehourSerializer
+    permission_classes = [permissions.IsAuthenticated]

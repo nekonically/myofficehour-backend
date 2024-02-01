@@ -24,13 +24,13 @@ class Status(models.Model):
         "Officehour",
         on_delete=models.CASCADE,
     )
-    STATUS_CHOICES = {
-        "OT":"Ontime",
-        "OC":"Canceled",
-        "DL":"Delayed",
-        "PP":"Postponed",
-        "ES":"Early"
-    }
+    STATUS_CHOICES = [
+    ("OT","Ontime"),
+    ("OC","Canceled"),
+        ("DL","Delayed"),
+        ("PP","Postponed"),
+        ("ES","Early")
+    ]
     status = models.CharField(choices=STATUS_CHOICES,null=True, blank=False,max_length=16, default="NA")
 
     created_at = models.DateTimeField(auto_now_add=True)
